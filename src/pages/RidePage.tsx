@@ -77,7 +77,8 @@ export function RidePage() {
 
 function Hud() {
   const openGrowth = () => useRide.setState({ overlay: { kind: 'growth' } })
-  const dock = useRide((s) => !phoneInWorld(s.frame.shot.type) || window.innerHeight > window.innerWidth)
+  const portrait = window.innerHeight > window.innerWidth
+  const dock = useRide((s) => (!phoneInWorld(s.frame.shot.type) || portrait) && !(portrait && s.frame.hold))
   return (
     <>
       <Transitions />
