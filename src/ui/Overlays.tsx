@@ -3,6 +3,8 @@ import { config } from '../content/config'
 import { useRide } from '../engine/store'
 import { scenes } from '../engine/timeline'
 import type { Hotspot } from '../engine/types'
+import { collectSticker } from '../engine/store'
+import { ReceiptOverlay, currentReceipt } from './Receipt'
 
 export const linkFor = (key: string | null | undefined) => {
   if (!key) return null
@@ -14,9 +16,18 @@ const Fillable = ({ text }: { text: string }) => <span className={/\[(FILL|PLACE
 /** Glowing hotspot chips (phase 1). In phase 4 these anchor to the 3D props. */
 export function HotspotLayer() {
   const hotspots = useRide((s) => s.frame.hotspots)
-  if (!hotspots.length) return null
+  const t = useRide((s) => Math.floor(s.t * 4) / 4)
+  const ride = useRide((s) => s.ride)
+  const got = useRide((s) => s.stickers)
+  const stickers = t >= 120 && t < 128 ? ride.phoneLines.filter((l) => l.sticker && t >= l.wordStart) : []
+  if (!hotspots.length && !stickers.length) return null
   return (
     <div className="hotspot-tray">
+      {stickers.map((l, i) => (
+        <button key={l.id} className="hotspot-chip" aria-pressed={got.includes(l.sticker!)} onClick={() => collectSticker(l.sticker!)}>
+          {got.includes(l.sticker!) ? '✓' : '+'} Sticker {i + 1}: {l.cleanText}
+        </button>
+      ))}
       {hotspots.map((h) => (
         <button key={h.id} className="hotspot-chip" onClick={() => openHotspot(h)} aria-label={`Open: ${h.title}`}>
           ✦ {h.kind === 'growth' ? 'Open the card' : h.title}
@@ -87,6 +98,10 @@ export function OverlayLayer() {
   if (!overlay) return null
   if (overlay.kind === 'hotspot') return <HotspotCard id={overlay.id} />
   if (overlay.kind === 'growth') return <GrowthPage />
+  if (overlay.kind === 'receipt') {
+    const r = currentReceipt()
+    return r ? <ReceiptOverlay r={r} onClose={close} /> : null
+  }
   return null
 }
 

@@ -41,7 +41,7 @@ s = await S(); ok(s.t >= 93 && s.choices.reroute === 'push', `reroute choice sto
 
 await page.evaluate(() => window.__ride.seek(136)); await page.waitForTimeout(300)
 s = await S(); ok(s.phone === 'card' && s.banners.includes('TOTAL'), `arrival: total ${s.words} words, phone ${s.phone}`)
-await page.locator('.phone-card').click(); await page.waitForTimeout(400)
+await page.getByRole('button', { name: 'Open: If I joined Wispr Flow India' }).click(); await page.waitForTimeout(400)
 const t1 = (await S()).t; await page.waitForTimeout(500)
 ok((await S()).t === t1, 'growth page pauses the ride')
 await page.getByRole('button', { name: 'Continue the ride' }).click()
@@ -54,6 +54,21 @@ await page.getByRole('button', { name: 'Pay fare' }).click(); await page.waitFor
 s = await S(); ok(s.t >= 170 && s.fare && s.fare.words > 0, `fare paid: ${s.fare?.words} words, ${s.fare?.ums} ums, best "${s.fare?.bestLine}"`)
 await page.evaluate(() => window.__ride.seek(176)); await page.waitForTimeout(300)
 ok(await page.getByText('The resume I never had to type').isVisible(), `trip log visible with ${(await S()).collected} clean lines`)
+
+// receipt opens at 170, encodes into the URL, and a shared link reopens it
+await page.evaluate(() => window.__ride.seek(169.9)); await page.waitForTimeout(800)
+ok(await page.getByRole('dialog', { name: 'Your ride receipt' }).isVisible(), 'receipt opens after the fare')
+await page.getByRole('button', { name: 'Copy link' }).click().catch(() => {})
+const link = await page.evaluate(() => { const s = window.__ride.store.getState(); return s.fare })
+const dl = page.waitForEvent('download', { timeout: 20000 }).catch(() => null)
+await page.getByRole('button', { name: 'Download PNG' }).click()
+const file = await dl
+ok(!!file, 'receipt PNG downloads' + (file ? ': ' + file.suggestedFilename() : ''))
+await page.getByRole('button', { name: 'Continue to the trip log' }).click()
+const enc = await page.evaluate(async () => { const m = await import('/src/ui/receiptData.ts'); return m.encodeReceipt({ v: 1, a: 'Machaa', w: 42, u: 3, b: 'Test line.', s: [], r: 'change', d: '2026-11-01' }) })
+await page.goto(base + '/#r=' + enc, { waitUntil: 'load' }); await page.waitForTimeout(800)
+ok(await page.getByText('Your friend paid this fare.').isVisible(), 'shared receipt link opens the friend view')
+void link
 
 ok(errors.length === 0, `no console errors${errors.length ? ': ' + errors.join(' | ') : ''}`)
 await browser.close()

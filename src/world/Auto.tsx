@@ -16,6 +16,7 @@ import { Flags } from './props/Flags'
 import { RateCard } from './props/RateCard'
 import { MirrorEyes } from './MirrorEyes'
 import { WindshieldCaption } from './WindshieldCaption'
+import { QRSticker } from './props/QRSticker'
 
 const P = config.auto.paint
 
@@ -114,6 +115,7 @@ export function Auto({ phone = true }: { phone?: boolean }) {
           <planeGeometry args={[0.36, 0.09]} />
           <meshStandardMaterial map={plate} />
         </mesh>
+        <QRSticker />
         <Flags />
         <RateCard />
         <Meter />

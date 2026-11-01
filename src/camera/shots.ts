@@ -48,8 +48,8 @@ export const SHOT_DEFAULTS: Record<ShotType, { fov: number; shake: number; dof: 
   MIRROR: { fov: 22, shake: 0.4, dof: 0.8, space: 'auto' },
 }
 
-const EYE: Vec3 = [0, 1.2, -0.55] // back-seat eye
-const AHEAD: Vec3 = [0, 1.05, 12]
+const EYE: Vec3 = [0.3, 1.24, -0.6] // back-seat eye, sitting a little to the kerb side
+const AHEAD: Vec3 = [0.1, 1.05, 12]
 const MIRROR_CAM: Vec3 = [0.3, 1.44, 0.62]
 const MIRROR_AT: Vec3 = [0, 1.5, 0.98] // the rear-view mirror
 
@@ -135,6 +135,6 @@ export const shots: Shot[] = [
   // ── S11 Trip log · sunrise ────────────────────────────────────────
   { scene: 'triplog', start: 170, end: 175, type: 'DRONE', from: [0, 12, -10], to: [0, 70, -40], lookAt: [0, 0, 10], lookTo: [0, 0, 60], transition: 'fade', ease: 'power2.inOut',
     notes: 'Rise over the route. Voice skyline from the ride.' },
-  { scene: 'triplog', start: 175, end: 181, type: 'EXT_WIDE', from: [-6, 2, -4], to: [-5, 2.5, -8], lookAt: [0, 1, 8], transition: 'fade',
-    notes: 'Post-credit: auto drives off. Trip log overlays.' },
+  { scene: 'triplog', start: 175, end: 181, type: 'EXT_WIDE', space: 'anchor', anchor: 175, from: [-5, 2.2, -6], to: [-4.5, 2.6, -7], lookAt: [1, 1.2, 6], lookTo: [1, 1.2, 30], transition: 'fade',
+    notes: 'Post-credit: the auto drives off to its next pickup. Trip log overlays.' },
 ]

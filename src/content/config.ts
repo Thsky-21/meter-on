@@ -46,9 +46,9 @@ export const config = {
   /** metres per second at full voice activity, per act */
   baseSpeed: { dusk: 9, night: 12, rain: 4, latenight: 8, predawn: 10, sunrise: 7 } as Record<ActId, number>,
   /** fraction of baseSpeed kept during silence, per scene (0 = stops dead) */
-  speedFloor: { pickup: 1, mahalingpur: 0.35, startup: 0.35, build: 0.35, jam: 0, reroute: 0.3, voice: 0.4, stickers: 0, arrival: 0.25, fare: 0, triplog: 0 } as Record<string, number>,
+  speedFloor: { pickup: 1, mahalingpur: 0.35, startup: 0.35, build: 0.35, jam: 0, reroute: 0.3, voice: 0.4, stickers: 0, arrival: 0.25, fare: 0, triplog: 1 } as Record<string, number>,
   /** Hard stops (seconds): the auto is parked inside these windows (pickup, Silk Board, signal, arrival). */
-  parked: [[6.8, 11.2], [62, 85.6], [120.5, 128], [136, 180]] as [number, number][],
+  parked: [[6.8, 11.2], [62, 85.6], [120.5, 128], [136, 175]] as [number, number][],
   activitySmoothing: 0.6, // seconds
 
   // ---- fare ----

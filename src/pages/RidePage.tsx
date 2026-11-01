@@ -16,8 +16,10 @@ import { TripLog } from '../ui/TripLog'
 import { Transitions } from '../ui/Transitions'
 import { SceneHUD } from '../ui/SceneHUD'
 import { phoneInWorld } from '../world/DashboardPhone'
+import { ReceiptOverlay } from '../ui/Receipt'
+import { receiptFromHash } from '../ui/receiptData'
 
-type Gate = 'booking' | 'countdown' | 'deeplink' | 'ride'
+type Gate = 'friend' | 'booking' | 'countdown' | 'deeplink' | 'ride'
 
 /** URL: ?stop=<sceneId> deep link · ?t=<seconds> (dev) · &still=1 paused frame for screenshots */
 function readParams() {
@@ -29,7 +31,13 @@ function readParams() {
 
 export function RidePage() {
   const params = useRef(readParams()).current
-  const [gate, setGate] = useState<Gate>(() => (params.still ? 'ride' : params.stop || params.t !== null ? 'deeplink' : 'booking'))
+  const friend = useRef(receiptFromHash()).current
+  const [gate, setGate] = useState<Gate>(() => (params.still ? 'ride' : friend ? 'friend' : params.stop || params.t !== null ? 'deeplink' : 'booking'))
+
+  // the fare was paid: show the receipt once as the drone rises
+  useEffect(() => useRide.subscribe((s, prev) => {
+    if (prev.t < 170 && s.t >= 170 && s.fare && !s.fare.skipped && !s.overlay) useRide.setState({ overlay: { kind: 'receipt' } })
+  }), [])
 
   useEffect(() => {
     startClock()
@@ -51,6 +59,7 @@ export function RidePage() {
     <>
       <StageWithGestures />
       {gate === 'ride' && <Hud />}
+      {gate === 'friend' && friend && <ReceiptOverlay r={friend} friend onClose={() => { history.replaceState(null, '', '/'); setGate('booking') }} />}
       {gate === 'booking' && <Booking onBook={book} />}
       {gate === 'countdown' && <Countdown onDone={() => { seek(params.t ?? 0); begin() }} />}
       {gate === 'deeplink' && (

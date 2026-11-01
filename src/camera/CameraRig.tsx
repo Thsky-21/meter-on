@@ -51,17 +51,20 @@ export function poseFor(shot: Shot, p: number, ride: Ride, t: number, portrait: 
   return { pos, look, fov: m.fov ?? shot.fov ?? d.fov, shake: d.shake }
 }
 
+/** prefers-reduced-motion → storyboard mode: one still per shot, no shake. */
+export const reducedMotion = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+
 export function CameraRig() {
   const { camera, size } = useThree()
   useFrame(() => {
     const f = getFrame()
     const ride = useRide.getState().ride
     const portrait = size.height > size.width
-    const pose = poseFor(f.shot, f.shotP, ride, f.t, portrait)
+    const pose = poseFor(f.shot, reducedMotion ? 0.5 : f.shotP, ride, f.t, portrait)
     const act = liveActivity() ?? f.activity
-    const amp = pose.shake * (0.003 + 0.01 * act) * (f.speed > 0.2 ? 1 : 0.4)
+    const amp = reducedMotion ? 0 : pose.shake * (0.003 + 0.01 * act) * (f.speed > 0.2 ? 1 : 0.4)
     // speed-breaker impulses: a short bump every ~11 s of driving
-    const bump = f.speed > 2 ? Math.max(0, Math.sin(f.distance * 0.09)) ** 40 * 0.03 * pose.shake : 0
+    const bump = f.speed > 2 && !reducedMotion ? Math.max(0, Math.sin(f.distance * 0.09)) ** 40 * 0.03 * pose.shake : 0
     pose.pos.x += noise(f.t, 1) * amp
     pose.pos.y += noise(f.t, 7) * amp + bump
     camera.position.copy(pose.pos)

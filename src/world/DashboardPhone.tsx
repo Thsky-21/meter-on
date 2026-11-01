@@ -12,7 +12,7 @@ export function DashboardPhone() {
   const visible = useRide((s) => phoneInWorld(s.frame.shot.type) && s.started && window.innerWidth >= window.innerHeight)
   const openGrowth = () => useRide.setState({ overlay: { kind: 'growth' } })
   return (
-    <group position={[...AUTO.phone]} rotation-y={Math.PI + 0.3} rotation-x={-0.2}>
+    <group position={[...AUTO.phone]} rotation-y={Math.PI - 0.35} rotation-x={-0.2}>
       <mesh position={[0, 0, -0.008]}>
         <boxGeometry args={[0.085, 0.15, 0.012]} />
         <meshStandardMaterial color="#111" />

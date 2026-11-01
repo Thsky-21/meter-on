@@ -16,11 +16,11 @@ export const rand = (seed: number, i: number) => hash(seed * 7919 + i * 104729)
 // ───────── auto local frame ─────────
 // x = driver's LEFT (kerb side, India keeps left), y up, z forward. Origin: ground, centre of the auto.
 export const AUTO = {
-  eye: [0, 1.2, -0.55] as const,
+  eye: [0.3, 1.24, -0.6] as const,
   seatZ: 0.35,
   handlebar: [0, 1.0, 0.78] as const,
-  meter: [0.34, 1.12, 0.86] as const,
-  phone: [-0.24, 1.1, 0.86] as const,
+  meter: [0.18, 1.12, 0.88] as const,
+  phone: [0.44, 1.14, 0.8] as const,
   mirror: [0, 1.5, 0.98] as const,
   headlight: [0, 0.95, 1.32] as const,
 }

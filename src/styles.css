@@ -135,7 +135,8 @@ a { color: var(--yellow); }
 .mic.on { background: var(--meter); color: #fff; }
 
 /* trip log + pages */
-.page { position: fixed; inset: 0; z-index: 35; overflow: auto; background: linear-gradient(180deg, rgba(255,214,160,.92), rgba(255,244,228,.97) 30%, #fffaf2); color: #20160a; }
+.page { position: fixed; inset: 0; z-index: 35; overflow: auto; background: linear-gradient(180deg, rgba(255,214,160,0) 0, rgba(255,214,160,.0) 30vh, rgba(255,236,206,.96) 46vh, #fffaf2 80vh); color: #20160a; animation: fadeIn 1s; }
+.page-inner { margin-top: 38vh !important; }
 .page-inner { width: min(760px, 100%); margin: 0 auto; padding: 48px 16px 96px; }
 .page h1 { font-size: clamp(30px, 5vw, 52px); letter-spacing: -.02em; margin: 0 0 6px; }
 .page h2 { margin-top: 36px; }

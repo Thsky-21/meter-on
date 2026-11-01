@@ -9,7 +9,7 @@ export function RateCard() {
     lines: [{ text: 'RATE CARD', size: 54, weight: 800, color: '#a8341f' }, ...config.rateCard.map((t) => ({ text: t, size: 46, weight: 600 }))],
   }), [])
   return (
-    <mesh position={[0.3, 0.86, 0.06]} rotation-y={Math.PI} rotation-x={0.1}>
+    <mesh position={[-0.34, 0.9, 0.06]} rotation-y={Math.PI} rotation-x={0.1} scale={0.75}>
       <planeGeometry args={[0.3, 0.156]} />
       <meshStandardMaterial map={tex} roughness={0.7} />
     </mesh>
