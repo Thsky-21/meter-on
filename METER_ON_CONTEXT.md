@@ -19,7 +19,7 @@
 ## 1. Who I am (only what the story needs)
 
 - **Sky** (Akash Melavanki), 21. Third-year Electronics & Instrumentation Engineering at MSRIT Bengaluru, graduating 2028. Lives in a hostel in Bengaluru.
-- From **Gokak**, Karnataka (home in Mahalingpur, Bagalkot district).
+- From **Mahalingpur**, Bagalkot district, Karnataka.
 - Solo founder under **ThSky Labs**. No prior internship or job.
 - **Thskyshield:** built a governance and boundary layer for AI agents. TypeScript SDK shipped publicly on npm (`@thsky-21/thskyshield`, Apache-2.0). Zero paying customers. Repositioned the same product several times: LLM spend kill-switch → run containment → agent governance. Sent ~50 cold emails (for the pre-pivot version) with zero replies; deliverability tests showed heavy spam placement. Lesson: shipping is not selling.
 - **SIH 2026** (team of 6 from MSRIT): ISRO problem statement SIH26172, a low-latency voice activator for edge devices. Custom wake-word detection on an ESP32-S3 with an INMP441 mic and a DS-CNN model. **Always credit the team.**
@@ -171,9 +171,9 @@ Booking happens before 0:00. **Hold windows** are real parts of the timeline tha
 
 | # | Scene | Time | Act | Shots | What happens | Meter / phone | Visitor |
 |---|---|---|---|---|---|---|---|
-| 0 | Booking | before 0:00 | — | UI | Map, pickup Gokak 2005 → drop Wispr Flow India 2026, driver card | — | Choose how to be addressed, tap Book ride |
+| 0 | Booking | before 0:00 | — | UI | Map, pickup Mahalingpur 2005 → drop Wispr Flow India 2026, driver card | — | Choose how to be addressed, tap Book ride |
 | 1 | Pickup | 0:00–0:12 | Dusk | Wide street → mirror eyes → POV getting in | First auto refuses; my auto arrives with flags; haggle line | Flag-down beep, 0 WORDS, phone "Listening" | — |
-| 2 | Gokak | 0:12–0:28 | Dusk | POV city folds away → wide fields road → POV painted wall | Home; the first slow messy-to-clean line | Meter starts ticking | Hotspot: painted wall |
+| 2 | Mahalingpur | 0:12–0:28 | Dusk | POV city folds away → wide fields road → POV painted wall | Home; the first slow messy-to-clean line | Meter starts ticking | Hotspot: painted wall |
 | 3 | Startup capital | 0:28–0:40 | Night | Tunnel exit wide → front three-quarter past the MSRIT gate → POV | Welcome sign; circuit traces on the lanes; why E&I | NIGHT RATE | Hotspot: gate |
 | 4 | First build | 0:40–1:00 | Night | Over-the-shoulder through hostel corridor → wide flyover → POV billboard | Code on gantry signs, startup hoardings, meetup board | Meter speeds up | Hotspot: npm billboard |
 | 5 | Silk Board | 1:00–1:30 | Rain | Drone over the jam → POV rain → mirror eyes | 50 / 0 billboard, delivery rider, silence | WAITING counts silence | **Hold 1:17–1:25:** honk to move |
@@ -224,7 +224,7 @@ Later (v1.1+): Quick ride (60 s), mirror questions, optional voice controls duri
 | Scene | Draft line | Clean headline |
 |---|---|---|
 | 1 Pickup | [FILL Kannada haggle] … this meter doesn't take rupees. It counts words. | Meter's on. It counts words. |
-| 2 Gokak | Start from the start? Okay. Gokak. Small town. … | [PLACEHOLDER] I'm from Gokak. Small town, big questions. |
+| 2 Mahalingpur | Start from the start? Okay. Mahalingpur. Small town. … | [PLACEHOLDER] I'm from Mahalingpur. Small town, big questions. |
 | 3 Startup capital | I picked E&I on purpose … | [PLACEHOLDER] I picked E&I to build things that are hard to copy. |
 | 4 First build | In my hostel room I built a safety layer for AI agents and shipped it to npm. Then the hard part: shipping isn't selling. | [PLACEHOLDER] I shipped a product before I knew how to sell it. |
 | 5 Silk Board | Fifty cold emails. Zero replies. … [DECIDE: include the month I stopped?] | [PLACEHOLDER] Being stuck taught me more than shipping did. |
@@ -302,7 +302,7 @@ Later (v1.1+): Quick ride (60 s), mirror questions, optional voice controls duri
 - [ ] Internship or "Open to either"; exact start-date wording
 - [ ] Sky's face style
 - [ ] The auto's exact paint
-- [ ] Gokak landmark (Gokak Falls or something more personal)
+- [ ] Mahalingpur landmark (something personal from home)
 - [ ] Whether the Silk Board scene includes the month I stopped
 - [ ] My 3 sticker values
 - [ ] Kannada lines (refusal, haggle, signboards)

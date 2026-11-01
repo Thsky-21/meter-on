@@ -1,0 +1,345 @@
+{
+  "meta": { "title": "Meter On", "durationTarget": 180, "version": 1 },
+  "scenes": [
+    {
+      "id": "pickup",
+      "order": 1,
+      "name": "Pickup",
+      "start": 0,
+      "end": 12,
+      "act": "dusk",
+      "lines": [
+        {
+          "id": "pickup-refusal",
+          "speaker": "other",
+          "captionOnly": true,
+          "start": 1.0,
+          "raw": "[FILL: Kannada 'won't come' line]",
+          "clean": "[FILL: Kannada 'won't come' line]",
+          "words": null,
+          "audio": null,
+          "langs": ["kn"]
+        },
+        {
+          "id": "pickup-1",
+          "speaker": "sky",
+          "start": 7.2,
+          "raw": "[FILL: Kannada meter haggle line] … uh, this meter doesn't take rupees. It, um, counts words.",
+          "clean": "Meter's on. It counts words.",
+          "words": null,
+          "audio": null,
+          "langs": ["kn", "en"]
+        }
+      ],
+      "hotspots": [],
+      "holds": []
+    },
+    {
+      "id": "mahalingpur",
+      "order": 2,
+      "name": "Mahalingpur",
+      "start": 12,
+      "end": 28,
+      "act": "dusk",
+      "lines": [
+        {
+          "id": "mahalingpur-1",
+          "speaker": "sky",
+          "status": "placeholder",
+          "start": 13.0,
+          "slow": 1.5,
+          "raw": "Start from the start? Okay. Uh, Mahalingpur. Small town, um, big questions.",
+          "clean": "[PLACEHOLDER] I'm from Mahalingpur. Small town, big questions.",
+          "proof": null,
+          "words": null,
+          "audio": null,
+          "langs": ["en"]
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "painted-wall",
+          "start": 24,
+          "end": 28,
+          "title": "Mahalingpur · 2005",
+          "body": "[FILL: one line about home]",
+          "image": null,
+          "link": null
+        }
+      ],
+      "holds": []
+    },
+    {
+      "id": "startup",
+      "order": 3,
+      "name": "Startup capital",
+      "start": 28,
+      "end": 40,
+      "act": "night",
+      "lines": [
+        {
+          "id": "msrit-1",
+          "speaker": "sky",
+          "status": "placeholder",
+          "start": 29.0,
+          "raw": "I picked, uh, E&I on purpose. [PLACEHOLDER: the reason, in your words]",
+          "clean": "[PLACEHOLDER] I picked E&I to build things that are hard to copy.",
+          "proof": null,
+          "words": null,
+          "audio": null,
+          "langs": ["en"]
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "college-gate",
+          "start": 31,
+          "end": 37,
+          "title": "MSRIT · Electronics & Instrumentation",
+          "body": "[FILL: one line about why E&I]",
+          "image": null,
+          "link": null
+        }
+      ],
+      "holds": []
+    },
+    {
+      "id": "build",
+      "order": 4,
+      "name": "First build",
+      "start": 40,
+      "end": 60,
+      "act": "night",
+      "lines": [
+        {
+          "id": "build-1",
+          "speaker": "sky",
+          "status": "placeholder",
+          "start": 41.0,
+          "raw": "In my hostel room I, um, built a safety layer for AI agents and shipped it to npm. Then the hard part: basically, shipping isn't selling.",
+          "clean": "[PLACEHOLDER] I shipped a product before I knew how to sell it.",
+          "proof": "npm",
+          "words": null,
+          "audio": null,
+          "langs": ["en"]
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "npm-billboard",
+          "start": 54,
+          "end": 60,
+          "title": "Thskyshield · live on npm",
+          "body": "A governance and boundary layer for AI agents. TypeScript SDK, Apache-2.0.",
+          "image": null,
+          "link": "npm"
+        }
+      ],
+      "holds": []
+    },
+    {
+      "id": "jam",
+      "order": 5,
+      "name": "Silk Board",
+      "start": 60,
+      "end": 90,
+      "act": "rain",
+      "lines": [
+        {
+          "id": "jam-1",
+          "speaker": "sky",
+          "status": "placeholder",
+          "start": 66.0,
+          "raw": "Fifty cold emails. Zero replies. Uh … [DECIDE: mention the month I stopped?]",
+          "clean": "[PLACEHOLDER] Being stuck taught me more than shipping did.",
+          "proof": null,
+          "words": null,
+          "audio": null,
+          "langs": ["en"]
+        },
+        {
+          "id": "jam-rider",
+          "speaker": "other",
+          "captionOnly": true,
+          "start": 70.0,
+          "raw": "[PLACEHOLDER] Even groceries ship faster than my product.",
+          "clean": "[PLACEHOLDER] Even groceries ship faster than my product.",
+          "words": null,
+          "audio": null,
+          "langs": ["en"]
+        },
+        {
+          "id": "jam-2",
+          "speaker": "sky",
+          "start": 85.6,
+          "raw": "Honking doesn't help. Changing the route does.",
+          "clean": "Honking doesn't help. Changing the route does.",
+          "proof": null,
+          "words": null,
+          "audio": null,
+          "langs": ["en"]
+        }
+      ],
+      "hotspots": [],
+      "holds": [{ "id": "jam-horn", "start": 77, "end": 85, "kind": "horn" }]
+    },
+    {
+      "id": "reroute",
+      "order": 6,
+      "name": "Reroute",
+      "start": 90,
+      "end": 102,
+      "act": "latenight",
+      "lines": [
+        {
+          "id": "reroute-reveal-push",
+          "speaker": "sky",
+          "status": "placeholder",
+          "when": { "choice": "reroute", "is": "push" },
+          "start": 93.0,
+          "raw": "Pushing harder? Tried it. Fifty emails.",
+          "clean": "[PLACEHOLDER] Pushing harder was the jam.",
+          "words": null,
+          "audio": null,
+          "langs": ["en"]
+        },
+        {
+          "id": "reroute-reveal-change",
+          "speaker": "sky",
+          "status": "placeholder",
+          "when": { "choice": "reroute", "is": "change" },
+          "start": 93.0,
+          "raw": "Change direction. That's what I did.",
+          "clean": "[PLACEHOLDER] So I changed direction.",
+          "words": null,
+          "audio": null,
+          "langs": ["en"]
+        },
+        {
+          "id": "reroute-1",
+          "speaker": "sky",
+          "status": "placeholder",
+          "start": 95.8,
+          "raw": "Three rewrites of the same story. Then, um, Indian voice agents. I fell for voice.",
+          "clean": "[PLACEHOLDER] Every reroute was a lesson in positioning.",
+          "proof": null,
+          "words": null,
+          "audio": null,
+          "langs": ["en"]
+        }
+      ],
+      "hotspots": [],
+      "holds": [{ "id": "reroute-choice", "start": 90, "end": 93, "kind": "choice", "choice": "reroute", "options": ["push", "change"], "default": "change" }]
+    },
+    {
+      "id": "voice",
+      "order": 7,
+      "name": "Voice, silicon up",
+      "start": 102,
+      "end": 120,
+      "act": "predawn",
+      "lines": [
+        {
+          "id": "voice-1",
+          "speaker": "sky",
+          "status": "placeholder",
+          "start": 103.0,
+          "raw": "Voice at three levels. A chip that wakes on one word, with my SIH team. AI agents that speak, uh, Hindi and Hinglish. And now, um, people who'd rather talk than type.",
+          "clean": "Voice, from the silicon up.",
+          "proof": "sih",
+          "words": null,
+          "audio": null,
+          "langs": ["en"]
+        }
+      ],
+      "hotspots": [
+        {
+          "id": "sih-board",
+          "start": 105,
+          "end": 114,
+          "title": "SIH 2026 · team project",
+          "body": "ISRO problem statement SIH26172: a low-latency wake-word activator on an ESP32-S3 with an INMP441 mic and a DS-CNN model. Built with my team of six from MSRIT. [FILL: team credit]",
+          "image": null,
+          "link": "sih"
+        }
+      ],
+      "holds": []
+    },
+    {
+      "id": "stickers",
+      "order": 8,
+      "name": "Stickers",
+      "start": 120,
+      "end": 128,
+      "act": "predawn",
+      "lines": [
+        { "id": "sticker-1", "speaker": "sky", "sticker": "value-1", "start": 120.8, "raw": "[FILL: value 1, one spoken line]", "clean": "[FILL: value 1]", "words": null, "audio": null, "langs": ["en"] },
+        { "id": "sticker-2", "speaker": "sky", "sticker": "value-2", "start": 123.2, "raw": "[FILL: value 2, one spoken line]", "clean": "[FILL: value 2]", "words": null, "audio": null, "langs": ["en"] },
+        { "id": "sticker-3", "speaker": "sky", "sticker": "value-3", "start": 125.6, "raw": "[FILL: value 3, one spoken line]", "clean": "[FILL: value 3]", "words": null, "audio": null, "langs": ["en"] }
+      ],
+      "hotspots": [],
+      "holds": []
+    },
+    {
+      "id": "arrival",
+      "order": 9,
+      "name": "Arrival",
+      "start": 128,
+      "end": 140,
+      "act": "sunrise",
+      "lines": [
+        {
+          "id": "arrival-1",
+          "speaker": "sky",
+          "status": "placeholder",
+          "start": 129.0,
+          "raw": "Here we are. Um … [PLACEHOLDER: one line] … Nothing moved until I spoke.",
+          "clean": "Nothing moved until I spoke.",
+          "proof": null,
+          "words": null,
+          "audio": null,
+          "langs": ["en"]
+        }
+      ],
+      "hotspots": [
+        { "id": "growth-card", "kind": "growth", "start": 135, "end": 140, "title": "If I joined Wispr Flow India", "body": "", "image": null, "link": null }
+      ],
+      "holds": []
+    },
+    {
+      "id": "fare",
+      "order": 10,
+      "name": "The fare",
+      "start": 140,
+      "end": 170,
+      "act": "sunrise",
+      "lines": [
+        {
+          "id": "fare-1",
+          "speaker": "sky",
+          "log": false,
+          "start": 140.0,
+          "raw": "{address}, fare? Not money. Thirty seconds of your story.",
+          "clean": "{address}, fare? Not money. Thirty seconds of your story.",
+          "words": null,
+          "audio": null,
+          "audioByAddress": null,
+          "langs": ["en"]
+        }
+      ],
+      "hotspots": [],
+      "holds": [{ "id": "fare", "start": 143, "end": 170, "kind": "fare" }]
+    },
+    {
+      "id": "triplog",
+      "order": 11,
+      "name": "Trip log",
+      "start": 170,
+      "end": 180,
+      "act": "sunrise",
+      "lines": [],
+      "hotspots": [],
+      "holds": []
+    }
+  ]
+}

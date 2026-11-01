@@ -85,9 +85,9 @@ I'll also add `npm run check-script`: warns when a line's (estimated or real) wo
 
 **Q2 — Fare length.** The window is 143–170 = 27 s. Either (a) **recommended:** start the 30 s timer at 140 under Sky's line, so the visitor gets 30 s and the ride stays 3:00, or (b) shift S10 to 140–173 and S11 to 173–183 (ride becomes 3:03), or (c) make the timer 27 s.
 
-**Q3 — The opening line vs. the flag-down.** `pickup-1` starts at 7.2 and runs ~7 s with estimated timing, past the 9.5 s flag-down. The context says the meter *starts ticking in Gokak*. My default: **words before the flag-down don't count** (meter shows 0 WORDS at 9.5, then counts everything after). OK?
+**Q3 — The opening line vs. the flag-down.** `pickup-1` starts at 7.2 and runs ~7 s with estimated timing, past the 9.5 s flag-down. The context says the meter *starts ticking in Mahalingpur*. My default: **words before the flag-down don't count** (meter shows 0 WORDS at 9.5, then counts everything after). OK?
 
-**Q4 — Overlap budget.** With estimated timings, several placeholder lines are longer than their windows (e.g. pickup into Gokak, Gokak's 1.5× slow line). My default: shorten nothing; `check-script` reports it, and your real recordings decide. OK?
+**Q4 — Overlap budget.** With estimated timings, several placeholder lines are longer than their windows (e.g. pickup into Mahalingpur, Mahalingpur's 1.5× slow line). My default: shorten nothing; `check-script` reports it, and your real recordings decide. OK?
 
 **Q5 — The first auto's refusal at 0–3.** Is that line spoken (a second voice) or caption-only? Default: **caption-only**, since we never fake voices and it's not your voice. It won't count on the meter.
 
@@ -104,7 +104,7 @@ I'll also add `npm run check-script`: warns when a line's (estimated or real) wo
 - **Caption languages:** English only, with the language toggle stub.
 - **Fare recognition language:** `en-IN` default, with `hi-IN` and `kn-IN` offered in a small dropdown (pending Q1, since on-device support differs by language).
 - **Referral on receipt:** none (plain "Book your own ride" link) until you decide.
-- **Booking map:** abstract SVG of roads with a Gokak → Bengaluru dotted line, not geographically accurate.
+- **Booking map:** abstract SVG of roads with a Mahalingpur → Bengaluru dotted line, not geographically accurate.
 - **Sticker values, landmark, Kannada lines:** visible `[FILL]` placeholders.
 
 ## 7. Repo hygiene
@@ -115,3 +115,10 @@ I'll also add `npm run check-script`: warns when a line's (estimated or real) wo
 ---
 
 **Waiting for your OK and answers to Q1–Q8 before Phase 1.**
+
+---
+
+## 8. Decisions (1 Nov 2026)
+
+- Home town is **Mahalingpur** everywhere (scene id `mahalingpur`, painted wall "Mahalingpur · 2005", booking pickup "Mahalingpur, 2005").
+- Q1–Q8: all recommended defaults accepted. Section 6 defaults accepted, including the green/yellow/black paint.
