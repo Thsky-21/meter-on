@@ -13,6 +13,9 @@ import { PhoneScreen } from '../ui/PhoneScreen'
 import { RouteBar } from '../ui/RouteBar'
 import { Stage } from '../ui/Stage'
 import { TripLog } from '../ui/TripLog'
+import { Transitions } from '../ui/Transitions'
+import { SceneHUD } from '../ui/SceneHUD'
+import { phoneInWorld } from '../world/DashboardPhone'
 
 type Gate = 'booking' | 'countdown' | 'deeplink' | 'ride'
 
@@ -65,13 +68,16 @@ export function RidePage() {
 
 function Hud() {
   const openGrowth = () => useRide.setState({ overlay: { kind: 'growth' } })
+  const dock = useRide((s) => !phoneInWorld(s.frame.shot.type) || window.innerHeight > window.innerWidth)
   return (
     <>
+      <Transitions />
       <div className="hud">
+        <SceneHUD />
         <RouteBar />
         <MeterHUD />
         <HotspotLayer />
-        <div className="phone-dock"><PhoneScreen onCard={openGrowth} /></div>
+        {dock && <div className="phone-dock"><PhoneScreen onCard={openGrowth} /></div>}
         <Captions />
         <HoldLayer />
         <Controls />

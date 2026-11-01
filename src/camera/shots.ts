@@ -2,8 +2,9 @@
 //  SHOT LIST — this is where you direct.
 //
 //  One object per shot. Times are ride seconds. Positions are metres.
-//  space 'auto'  → from/to/lookAt are relative to the auto (x right, y up, z forward).
-//                   The back-seat eye is about [0, 1.25, -0.35].
+//  space 'auto'  → from/to/lookAt are relative to the auto: x = driver's LEFT (the kerb side;
+//                   India keeps left), y up, z forward. The back-seat eye is [0, 1.2, -0.55].
+//  space 'anchor'→ relative to where the auto is at ride time `anchor` (good for a static street camera).
 //  space 'world' → absolute world coordinates (z = distance along the road).
 //  space 'macro' → the chip world (S7), a separate set at the origin.
 //  from → to is a move over the shot's duration, eased with `ease` (any GSAP ease name).
@@ -20,7 +21,9 @@ export interface Shot {
   start: number
   end: number
   type: ShotType
-  space?: 'auto' | 'world' | 'macro'
+  space?: 'auto' | 'anchor' | 'world' | 'macro'
+  /** for space 'anchor': the ride time whose auto position is the origin */
+  anchor?: number
   from: Vec3
   to?: Vec3
   lookAt: Vec3
@@ -45,27 +48,27 @@ export const SHOT_DEFAULTS: Record<ShotType, { fov: number; shake: number; dof: 
   MIRROR: { fov: 22, shake: 0.4, dof: 0.8, space: 'auto' },
 }
 
-const EYE: Vec3 = [0, 1.25, -0.35] // back-seat eye
+const EYE: Vec3 = [0, 1.2, -0.55] // back-seat eye
 const AHEAD: Vec3 = [0, 1.05, 12]
-const MIRROR_CAM: Vec3 = [0.05, 1.42, 0.25]
-const MIRROR_AT: Vec3 = [0.18, 1.52, 0.95] // the rear-view mirror
+const MIRROR_CAM: Vec3 = [0.3, 1.44, 0.62]
+const MIRROR_AT: Vec3 = [0, 1.5, 0.98] // the rear-view mirror
 
 export const shots: Shot[] = [
   // ── S1 Pickup · dusk ──────────────────────────────────────────────
-  { scene: 'pickup', start: 0, end: 3, type: 'EXT_WIDE', space: 'world', from: [-6, 1.6, 8], to: [-5.5, 1.7, 9], lookAt: [2, 1.2, 18],
+  { scene: 'pickup', start: 0, end: 3, type: 'EXT_WIDE', space: 'anchor', anchor: 6.8, from: [6.2, 1.7, -16], to: [6, 1.7, -15], lookAt: [0.5, 1.4, 6],
     notes: 'Street corner. Lamps flicker on, darshini steam left, metro barricades behind. First auto passes.' },
-  { scene: 'pickup', start: 3, end: 7, type: 'EXT_WIDE', space: 'world', from: [-5.5, 1.7, 9], to: [-4.8, 1.5, 12], lookAt: [1.2, 1.0, 18],
+  { scene: 'pickup', start: 3, end: 7, type: 'EXT_WIDE', space: 'anchor', anchor: 6.8, from: [5.4, 1.5, 9], to: [4.6, 1.4, 7], lookAt: [2, 1.0, -12], lookTo: [2.4, 1.0, 0],
     ease: 'power2.out', notes: 'My auto swings in, flags + LED glowing, stops with a jolt.' },
-  { scene: 'pickup', start: 7, end: 9, type: 'MIRROR', from: MIRROR_CAM, lookAt: MIRROR_AT, transition: 'cut', notes: "Sky's eyes in the mirror." },
-  { scene: 'pickup', start: 9, end: 12, type: 'POV', from: [-0.9, 1.0, -0.6], to: EYE, lookAt: AHEAD, ease: 'power2.inOut',
+  { scene: 'pickup', start: 7, end: 9, type: 'MIRROR', from: MIRROR_CAM, lookAt: MIRROR_AT, fov: 30, transition: 'cut', notes: "Sky's eyes in the mirror." },
+  { scene: 'pickup', start: 9, end: 12, type: 'POV', from: [1.1, 1.45, -0.7], to: EYE, lookAt: AHEAD, ease: 'power2.inOut',
     mobile: { fov: 82 }, notes: 'Camera sits down: Sky’s back, handlebar, meter. Flag-down 9.5.' },
 
   // ── S2 Mahalingpur · dusk → golden hour ───────────────────────────
   { scene: 'mahalingpur', start: 12, end: 16, type: 'POV', from: EYE, lookAt: AHEAD, transition: 'fold', mobile: { fov: 82 },
     notes: 'Page-fold: city buildings fold flat and fall away.' },
-  { scene: 'mahalingpur', start: 16, end: 24, type: 'EXT_WIDE', from: [-14, 4, -10], to: [-12, 3.5, 6], lookAt: [0, 1, 6], transition: 'cut',
+  { scene: 'mahalingpur', start: 16, end: 24, type: 'EXT_WIDE', from: [-11, 3.2, 4], to: [-10, 3.6, 16], lookAt: [0, 1, 4], lookTo: [0, 1, 10], transition: 'cut',
     mobile: { from: [-18, 5, -14], fov: 62 }, notes: 'Two-lane road through fields, [FILL: landmark] far off. Sky small in frame.' },
-  { scene: 'mahalingpur', start: 24, end: 28, type: 'POV', from: EYE, lookAt: [-6, 1.6, 10], lookTo: [-7, 1.6, 3], transition: 'cut',
+  { scene: 'mahalingpur', start: 24, end: 28, type: 'POV', from: EYE, lookAt: [6, 1.6, 10], lookTo: [7, 1.6, 3], transition: 'cut',
     mobile: { fov: 82 }, notes: 'Painted wall “Mahalingpur · 2005” (hotspot). Tunnel of light 26.5–28.' },
 
   // ── S3 Startup capital · night ────────────────────────────────────
@@ -79,17 +82,17 @@ export const shots: Shot[] = [
   // ── S4 First build · night ────────────────────────────────────────
   { scene: 'build', start: 40, end: 46, type: 'OTS', from: [-0.45, 1.55, -0.2], lookAt: [0.2, 1.2, 8], transition: 'whip',
     notes: 'Hostel corridor. Open door: 2 a.m. desk, terminal glow, noodles.' },
-  { scene: 'build', start: 46, end: 54, type: 'EXT_WIDE', from: [9, 6, -6], to: [9, 7, 10], lookAt: [0, 1.5, 4], transition: 'cut',
-    mobile: { from: [12, 8, -8], fov: 62 }, notes: 'Flyover, gantry shows npm publish. Hoardings, meetup board, darshini below.' },
+  { scene: 'build', start: 46, end: 54, type: 'EXT_WIDE', from: [-5.5, 4.2, -10], to: [-5.5, 5.5, -3], lookAt: [0, 1.4, 6], lookTo: [0, 3, 18], transition: 'cut',
+    mobile: { from: [-8, 10, -18], fov: 62 }, notes: 'Flyover, gantry shows npm publish. Hoardings, meetup board, darshini below.' },
   { scene: 'build', start: 54, end: 60, type: 'POV', from: EYE, lookAt: [4, 4, 20], lookTo: [2, 2.5, 8], transition: 'cut', mobile: { fov: 82 },
     notes: 'Billboard “Thskyshield · shipped · live on npm” (hotspot). Raindrops at 58.' },
 
   // ── S5 Silk Board · rain ──────────────────────────────────────────
-  { scene: 'jam', start: 60, end: 65, type: 'DRONE', from: [0, 45, -5], to: [0, 32, 0], lookAt: [0, 0, 2], transition: 'cut',
+  { scene: 'jam', start: 60, end: 65, type: 'DRONE', from: [-8, 30, -30], to: [-5, 22, -18], lookAt: [0, 0, 8], transition: 'cut',
     notes: 'Top-down over the junction. Sea of tail-lights. Auto stuck mid-frame.' },
   { scene: 'jam', start: 65, end: 74, type: 'POV', from: EYE, lookAt: AHEAD, transition: 'cut', mobile: { fov: 82 },
     notes: 'Rain on canopy. 50 / 0 billboard. WAITING. Rider zips past.' },
-  { scene: 'jam', start: 74, end: 77, type: 'MIRROR', from: MIRROR_CAM, lookAt: MIRROR_AT, transition: 'cut', notes: "Sky's eyes, quieter." },
+  { scene: 'jam', start: 74, end: 77, type: 'MIRROR', from: MIRROR_CAM, lookAt: MIRROR_AT, fov: 30, transition: 'cut', notes: "Sky's eyes, quieter." },
   { scene: 'jam', start: 77, end: 85, type: 'POV', from: EYE, lookAt: AHEAD, transition: 'cut', mobile: { fov: 82 }, notes: 'HOLD: Honk to move.' },
   { scene: 'jam', start: 85, end: 90, type: 'POV', from: EYE, lookAt: AHEAD, lookTo: [-4, 1, 10], ease: 'power1.inOut', mobile: { fov: 82 },
     notes: '“Honking doesn’t help…” Rerouting HUD, squeeze into side lane.' },
@@ -103,7 +106,7 @@ export const shots: Shot[] = [
   // ── S7 Voice, from the silicon up · pre-dawn ──────────────────────
   { scene: 'voice', start: 102, end: 105, type: 'POV', from: [0, 1.0, 3.2], to: [0, 0.95, 2.05], lookAt: [0, 0.95, 1.6], ease: 'power3.in',
     notes: 'Push into the headlight → match-cut.' },
-  { scene: 'voice', start: 105, end: 114, type: 'MACRO', from: [-6, 5, 10], to: [4, 3, 4], lookAt: [0, 0.5, 0], lookTo: [2, 0.5, -2], transition: 'match',
+  { scene: 'voice', start: 105, end: 114, type: 'MACRO', from: [-18, 8, 15], to: [-6, 5.5, 13], lookAt: [-4, 1.5, 0], lookTo: [6, 1.5, -1], transition: 'match',
     notes: 'Chip city: ESP32 block, mic tower, sound wave → neural layers → LED. “SIH 2026 · team project”.' },
   { scene: 'voice', start: 114, end: 117, type: 'POV', from: [0, 0.95, 2.05], to: EYE, lookAt: [0, 0.95, 6], lookTo: AHEAD, transition: 'match', ease: 'power2.out',
     notes: 'LED becomes the headlight; pull back onto the road.' },
@@ -119,7 +122,7 @@ export const shots: Shot[] = [
   // ── S9 Arrival · sunrise ──────────────────────────────────────────
   { scene: 'arrival', start: 128, end: 133, type: 'EXT_FRONT', from: [2.2, 1.3, 5], to: [1.7, 1.4, 4], lookAt: [0, 1.3, 0.3], transition: 'fade',
     mobile: { from: [2.8, 1.6, 6.2], fov: 52 }, notes: 'Golden light, long shadows, “Wispr Flow” billboard (text only).' },
-  { scene: 'arrival', start: 133, end: 135, type: 'MIRROR', from: MIRROR_CAM, lookAt: MIRROR_AT, transition: 'cut', notes: "Sky's eyes, smiling." },
+  { scene: 'arrival', start: 133, end: 135, type: 'MIRROR', from: MIRROR_CAM, lookAt: MIRROR_AT, fov: 30, transition: 'cut', notes: "Sky's eyes, smiling." },
   { scene: 'arrival', start: 135, end: 140, type: 'POV', from: EYE, lookAt: [0.15, 1.1, 0.9], transition: 'cut', mobile: { fov: 82 },
     notes: 'Auto stops. Final total. Phone flips to the growth card.' },
 

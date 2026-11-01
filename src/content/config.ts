@@ -113,19 +113,19 @@ export const config = {
       label: 'Night', ui: '#3d7bff',
       sky: ['#040a1f', '#13234d'], fog: '#0b1636', fogDensity: 0.02,
       sun: { color: '#7fa8ff', intensity: 0.25, elevation: 40, azimuth: 120 },
-      ambient: { color: '#3a5aa8', intensity: 0.25 }, street: '#ffb15c', accent: '#22e1ff', exposure: 1.1,
+      ambient: { color: '#4a6ac0', intensity: 0.45 }, street: '#ffb15c', accent: '#22e1ff', exposure: 1.1,
     },
     rain: {
       label: 'Rain', ui: '#7b8ea8',
       sky: ['#1a2230', '#3a4658'], fog: '#2c3646', fogDensity: 0.035,
       sun: { color: '#9fb0c8', intensity: 0.2, elevation: 50, azimuth: 120 },
-      ambient: { color: '#6f84a3', intensity: 0.3 }, street: '#ff9d5c', accent: '#ff3348', exposure: 1.0,
+      ambient: { color: '#7f94b3', intensity: 0.5 }, street: '#ff9d5c', accent: '#ff3348', exposure: 1.0,
     },
     latenight: {
       label: 'Late night', ui: '#6a4fd6',
       sky: ['#0b0820', '#2a1f55'], fog: '#1e1840', fogDensity: 0.025,
       sun: { color: '#8a7dff', intensity: 0.25, elevation: 35, azimuth: 90 },
-      ambient: { color: '#5544aa', intensity: 0.28 }, street: '#ffb15c', accent: '#2ef0d0', exposure: 1.05,
+      ambient: { color: '#6655bb', intensity: 0.45 }, street: '#ffb15c', accent: '#2ef0d0', exposure: 1.05,
     },
     predawn: {
       label: 'Pre-dawn', ui: '#14d1c0',

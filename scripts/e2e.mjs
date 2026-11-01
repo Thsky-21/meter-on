@@ -1,7 +1,7 @@
 // node scripts/e2e.mjs — functional smoke test of the ride systems (dev server on :5173).
 import { chromium } from 'playwright'
 const base = process.env.BASE ?? 'http://localhost:5173'
-const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--autoplay-policy=no-user-gesture-required'] })
+const browser = await chromium.launch({ args: ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist', '--autoplay-policy=no-user-gesture-required'] })
 const page = await browser.newPage({ viewport: { width: 1280, height: 720 } })
 const errors = []
 page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()) })
