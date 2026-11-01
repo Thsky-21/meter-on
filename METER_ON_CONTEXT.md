@@ -237,12 +237,21 @@ Later (v1.1+): Quick ride (60 s), mirror questions, optional voice controls duri
 
 ---
 
-## 12. Tech architecture (summary; full detail in METER_ON_V1_PROMPT.md)
+## 12. Tech architecture (summary; full detail in README.md and PLAN.md)
 
-- Vite + React + TypeScript; three.js via React Three Fiber, drei and postprocessing; GSAP; Zustand; Web Speech API; qrcode; html-to-image; deployed on Vercel.
+- Vite + React 18 + TypeScript; three.js via React Three Fiber 8, drei 9 and postprocessing; GSAP; Zustand; Web Speech API; qrcode; html-to-image; deployed on Vercel.
 - **Everything is a pure function of ride time `t`** plus the visitor's choices. One clock drives the camera, scenes, meter, captions and audio, which makes pause, seek, deep links (`?stop=jam`) and a later Remotion director's cut straightforward.
-- Content lives in `script.json` (scenes, lines, words, shots, hotspots, holds) and `config.ts`. Directing happens in `shots.ts`.
-- v1 uses procedural, stylized assets with a swap layer for real 3D models and audio later.
+- Content lives in `src/content/script.json` (scenes, lines, words, hotspots, holds) and `src/content/config.ts`. Directing happens in `src/camera/shots.ts`; roadside looks in `src/world/zones.ts`.
+- v1 uses procedural, stylized assets with a swap layer (`src/content/assets.ts`) for real 3D models and audio later.
+
+### Build status (1 Nov 2026)
+
+- **v1 built, phases 0–6 done.** Book ride → 3:00 ride → fare → receipt → trip log runs end to end; e2e test passes; no console errors.
+- **Repo:** https://github.com/Thsky-21/meter-on (branch `main`). **Not yet deployed to Vercel.** After deploying, set `config.siteUrl` to the real URL (QR sticker + share links) and redeploy.
+- **Decisions taken at build time:** Mahalingpur replaces Gokak everywhere (scene id `mahalingpur`). Words before the 9.5 s flag-down don't count. The fare's 30 s ring starts at 140 under Sky's line. The "won't come" refusal and the delivery-rider line are caption-only. Fare speech uses on-device recognition where available; otherwise the privacy line honestly says the browser's speech service is used. Default paint green/yellow/black; Sky's face minimal (no mouth), eyes detailed only in the mirror.
+- **Voice pipeline ready:** record `voice/<lineId>.mp3`, run Whisper with word timestamps to `voice/<lineId>.json`, then `npm run import-voice` and `npm run check-script`. File list in `public/audio/README.md`.
+- **Known gaps:** fare mic not yet tested with a real microphone; Safari/Firefox/Edge untested; high tier ≈39 fps on Iris Xe (adaptive resolution on); flyover is a street with gantries (not elevated); no recorded audio yet (synthesized SFX fill in).
+- **Placeholders:** `npm run todo` regenerates `TODO_FILL.md`.
 
 ---
 
@@ -290,7 +299,7 @@ Later (v1.1+): Quick ride (60 s), mirror questions, optional voice controls duri
 
 | Day | Work |
 |---|---|
-| Sun 1 Nov | Fill the [FILL] items I already know. Claude Code: plan, engine, look development. |
+| Sun 1 Nov | Fill the [FILL] items I already know. Claude Code: plan, engine, look development. ✅ Whole v1 built and pushed (ahead of plan). |
 | Mon 2 Nov | Scenes 1–9, holds, hotspots. Record my voice lines. |
 | Tue 3 Nov | Fare, receipt, trip log, mobile, deploy. Plug in my voice. Launch post. |
 | Wed 4 Nov | Record the video in the morning; submit by afternoon. |
@@ -300,13 +309,14 @@ Later (v1.1+): Quick ride (60 s), mirror questions, optional voice controls duri
 ## 18. Open decisions
 
 - [ ] Internship or "Open to either"; exact start-date wording
-- [ ] Sky's face style
-- [ ] The auto's exact paint
+- [x] Sky's face style (default accepted: minimal, backlit; revisit after /lab review)
+- [x] The auto's exact paint (default accepted: green lower, yellow upper, black canopy)
 - [ ] Mahalingpur landmark (something personal from home)
 - [ ] Whether the Silk Board scene includes the month I stopped
 - [ ] My 3 sticker values
 - [ ] Kannada lines (refusal, haggle, signboards)
-- [ ] Caption languages for v1
+- [x] Caption languages for v1 (English, with a language toggle stub)
+- [ ] Fictional startup hoarding names in S4 (Pivot.ly, SambarStack, DosaDB, Traffik.ai): keep or replace
 - [ ] Referral link on the receipt (disclosed) or plain download link
 - [ ] The first campaign for the growth page
 - [ ] The $3,000 answer
