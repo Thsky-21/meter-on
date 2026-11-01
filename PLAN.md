@@ -83,7 +83,7 @@ I'll also add `npm run check-script`: warns when a line's (estimated or real) wo
 - (b) Only allow on-device; everyone else types.
 - (c) Keep your line everywhere (I'd advise against it; it's not accurate in Chrome/Safari).
 
-**Q2 — Fare length.** The window is 143–170 = 27 s. Either (a) **recommended:** timer is 27 s, labelled "30 seconds" in copy is dropped to "Your story", or (b) shift S10 to 140–173 and S11 to 173–183 (ride becomes 3:03), or (c) start the timer at 140 under Sky's line.
+**Q2 — Fare length.** The window is 143–170 = 27 s. Either (a) **recommended:** start the 30 s timer at 140 under Sky's line, so the visitor gets 30 s and the ride stays 3:00, or (b) shift S10 to 140–173 and S11 to 173–183 (ride becomes 3:03), or (c) make the timer 27 s.
 
 **Q3 — The opening line vs. the flag-down.** `pickup-1` starts at 7.2 and runs ~7 s with estimated timing, past the 9.5 s flag-down. The context says the meter *starts ticking in Gokak*. My default: **words before the flag-down don't count** (meter shows 0 WORDS at 9.5, then counts everything after). OK?
 
